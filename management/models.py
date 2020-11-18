@@ -26,7 +26,7 @@ class Material(models.Model):
 class Color(models.Model):
     """One of the paracord colors we make bracelets out of."""
     name = models.CharField(max_length=200)
-    last_restock_length = models.IntegerField() # in Feet
+    estimated_length = models.IntegerField() # in Feet
     purchase_record = models.ForeignKey(Material, on_delete=models.PROTECT)
 
     def __str__(self):
@@ -59,14 +59,21 @@ class StoreProduct(models.Model):
     quantity = models.IntegerField()
     customer_price = models.DecimalField(max_digits=4, decimal_places=2) # Price
     our_price = models.DecimalField(max_digits=4, decimal_places=2) # Price
+    value = models.AutoField()
+
+    @property
+    def value(self):
+        return self.our_price * self.quantity
 
     def __str__(self):
         return self.store.full_name + " - " + self.product.name
 
 class Sale(models.Model):
+    """Records of sale"""
     customer = models.ForeignKey(Customer, on_delete=Product)
     date = models.DateField()
     revenue = models.DecimalField(max_digits=4, decimal_places=2) # Price
+    description = models.TextField()
 
     def __str__(self):
         return self.customer.full_name + " - " + str(self.date)
@@ -87,11 +94,22 @@ class Employee(models.Model):
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
-    sale = models.ForeignKey(Sale, on_delete=models.PROTECT, blank=True, null=True)
     due_date = models.DateField(blank=True, null=True)
 
+    @property
+    def incomplete_items(self):
+        incomplete_items = []
+        for item in self.item_set.all():
+            if not item.completed:
+                incomplete_items.append(item)
+        return incomplete_items
+
+
     def __str__(self):
-        return self.customer.full_name + " - " + str(self.due_date)
+        plural = "s"
+        if len(self.incomplete_items) == 1:
+            plural = ""
+        return self.customer.full_name + " - " + str(len(self.incomplete_items)) + " incomplete item" + plural + " - " + str(self.due_date)
 
 class Item(models.Model):
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
