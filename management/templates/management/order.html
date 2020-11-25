@@ -1,0 +1,26 @@
+{% extends 'management/base.html' %}
+{% block content %}
+    <div>
+        <div class="page-header container">
+            <h3>{{info_string}}</h3>
+        </div>
+        <h4 class="panel-heading">Order items:</h4>
+        {% for item in items %}
+            <div class="panel panel-default"><p>
+                <div class="panel-heading">
+                    {{item.blueprint.name}} - {{item.size}} inches -
+                    {% if item.complete %}
+                        Complete
+                    {% else %}
+                        Incomplete
+                    {% endif %}
+                </div>
+                <div class="panel-body">
+                    {% for color in item.itemcolor_set.all %}
+                        <br>{{color.slot_name}}: {{color.color.name}}</li>
+                    {% endfor %}
+                </div>
+            </p></div>
+        {% endfor %}
+    </div>
+{% endblock content %}

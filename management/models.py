@@ -59,7 +59,6 @@ class StoreProduct(models.Model):
     quantity = models.IntegerField()
     customer_price = models.DecimalField(max_digits=4, decimal_places=2) # Price
     our_price = models.DecimalField(max_digits=4, decimal_places=2) # Price
-    value = models.AutoField()
 
     @property
     def value(self):
@@ -93,6 +92,7 @@ class Employee(models.Model):
         return self.name
 
 class Order(models.Model):
+    """An incomplete order (complete orders are deleted and described by sale)"""
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
     due_date = models.DateField(blank=True, null=True)
 
@@ -104,12 +104,8 @@ class Order(models.Model):
                 incomplete_items.append(item)
         return incomplete_items
 
-
     def __str__(self):
-        plural = "s"
-        if len(self.incomplete_items) == 1:
-            plural = ""
-        return self.customer.full_name + " - " + str(len(self.incomplete_items)) + " incomplete item" + plural + " - " + str(self.due_date)
+        return self.customer.full_name + " - " + str(self.due_date)
 
 class Item(models.Model):
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
@@ -119,7 +115,7 @@ class Item(models.Model):
     completed = models.BooleanField(default=False)
 
     def __str__(self):
-        return str(self.wrist_size) + "in " + self.blueprint.name
+        return str(self.size) + "in " + self.blueprint.name
 
 class ItemColor(models.Model):
     slot_name = models.CharField(max_length=200)

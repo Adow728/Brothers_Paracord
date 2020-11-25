@@ -1,0 +1,16 @@
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Brother's Paracord - Management</title>
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+    </head>
+
+    <nav class="navbar navbar-default navbar-static-top">
+        <a href="{% url 'dashboard' %}" class="navbar-brand">Return to the dashboard</a>
+    </nav>
+    {% block content %}{% endblock content %}
+</html>

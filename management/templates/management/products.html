@@ -1,0 +1,16 @@
+{% extends 'management/base.html' %}
+{% block content %}
+    {% for product in products %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>{{product.name}}</h3>
+            </div>
+            <div class="panel-body">
+                <p>{{product.description}}<p>
+                <p><a href="{% url 'view_product' product.id %}">view</a>
+            </div>
+        </div>
+    {% empty %}
+        <p class="container">At the moment, no products are being sold.</p>
+    {% endfor %}
+{% endblock content %}

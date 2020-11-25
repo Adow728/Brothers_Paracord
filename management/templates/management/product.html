@@ -1,0 +1,14 @@
+{% extends 'management/base.html' %}
+{% block content %}
+    <div class="container page-header">
+        <h3>{{product.name}}</h3>
+    </div>
+    <div>
+        <p class="panel panel-default panel-body">{{product.description}}</p>
+        <div class="panel panel-default panel-body">
+            <p>Price: ${{product.order_cost}}</p>
+            <p>Employee payment: ${{product.employee_payment}}</p>
+        </div>
+    </div>
+    <a class="btn" href="{% url 'products' %}">View other products</a> 
+{% endblock content %}
