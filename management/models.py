@@ -87,6 +87,7 @@ class StoreSale(models.Model):
 
 class Employee(models.Model):
     name = models.CharField(max_length=200)
+    amount_owed = models.DecimalField(max_digits=4, decimal_places=2, default=0)
 
     def __str__(self):
         return self.name
@@ -110,7 +111,6 @@ class Order(models.Model):
 class Item(models.Model):
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
     blueprint = models.ForeignKey(Product, on_delete=models.PROTECT)
-    builder = models.ForeignKey(Employee, on_delete=models.PROTECT, blank=True, null=True)
     size = models.IntegerField() # in inches
     completed = models.BooleanField(default=False)
 
