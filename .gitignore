@@ -1,3 +1,4 @@
 bp_env/
-*/__pycache__/
+management/__pycache__/
+brothers_paracord/__pycache__/
 db.sqlite3
