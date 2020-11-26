@@ -96,6 +96,7 @@ class Order(models.Model):
     """An incomplete order (complete orders are deleted and described by sale)"""
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
     due_date = models.DateField(blank=True, null=True)
+    sale = models.ForeignKey(Sale, blank=True, null=True, on_delete=models.PROTECT)
 
     @property
     def incomplete_items(self):
@@ -113,6 +114,7 @@ class Item(models.Model):
     blueprint = models.ForeignKey(Product, on_delete=models.PROTECT)
     size = models.IntegerField() # in inches
     completed = models.BooleanField(default=False)
+    builder = models.ForeignKey(Employee, blank=True, null=True, on_delete=models.PROTECT)
 
     def __str__(self):
         return str(self.size) + "in " + self.blueprint.name
