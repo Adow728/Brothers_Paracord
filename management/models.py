@@ -1,3 +1,4 @@
+import builtins
 from django.db import models
 from django.core.validators import MinLengthValidator
 
@@ -114,7 +115,6 @@ class Item(models.Model):
     blueprint = models.ForeignKey(Product, on_delete=models.PROTECT)
     size = models.IntegerField() # in inches
     completed = models.BooleanField(default=False)
-    builder = models.ForeignKey(Employee, blank=True, null=True, on_delete=models.PROTECT)
 
     def __str__(self):
         return str(self.size) + "in " + self.blueprint.name
@@ -127,3 +127,9 @@ class ItemColor(models.Model):
     def __str__(self):
         return self.slot_name + ": " + self.color.name
     
+class EmployeeBuilds(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.PROTECT)
+    item = models.ForeignKey(Item, on_delete=models.PROTECT, blank=True, null=True)
+    builder = models.ForeignKey(Employee, on_delete=models.PROTECT)
+    verified = models.BooleanField(default=True)
+    description = models.TextField()
