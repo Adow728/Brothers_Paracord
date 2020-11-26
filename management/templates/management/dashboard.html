@@ -42,6 +42,17 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
+            <h3 class="panel-title">Employees</h3>
+        </div>
+        <div class="panel-body">
+            {% for employee in employees %}
+                {{employee.name}}: ${{employee.amount_owed|floatformat:2}}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
             <h3 class="panel-title">Budgeting</h3>
         </div>
         <div class="panel-body">

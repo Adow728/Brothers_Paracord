@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.db.models import Sum
 
-from .models import Color, Order, Product, Sale, Material, StoreProduct
+from .models import Color, Employee, Order, Product, Sale, Material, StoreProduct
 from .queries import find_capital
 
 # Create your views here.
@@ -10,6 +10,7 @@ from .queries import find_capital
 def manage(request):
     orders = Order.objects.order_by("due_date")
     colors = Color.objects.order_by("name")
+    employees = Employee.objects.order_by("amount_owed").reverse()
     num_products = len(Product.objects.all())
     total_sales = Sale.objects.aggregate(Sum("revenue"))["revenue__sum"]
     total_expenses = Material.objects.aggregate(Sum("price"))["price__sum"]
@@ -19,6 +20,7 @@ def manage(request):
     context = {
         "orders":orders, 
         "colors":colors,
+        "employees":employees,
         "products":num_products,
         "sales":total_sales,
         "expenses":total_expenses,

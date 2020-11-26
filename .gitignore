@@ -2,3 +2,4 @@ bp_env/
 management/__pycache__/
 brothers_paracord/__pycache__/
 db.sqlite3
+management/__pycache__/views.cpython-38.pyc
