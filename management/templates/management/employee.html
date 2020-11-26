@@ -1,0 +1,25 @@
+{% extends 'management/base.html' %}
+{% block content %}
+    <div class="container page-header">
+        <h3>{{employee.name}}</h3>
+        <p>Wages owed: ${{employee.amount_owed}}</p>
+    </div>
+
+    <div class="panel panel-default">
+        <p class="panel-heading">Recent Items</p>
+        <div class="panel-body">
+            {% for item in outstanding_items %}
+                <p>
+                {% if item.item != Null %}
+                    {{item.item}}
+                {% else %}
+                    {{item.product.name}}: {{item.description}}
+                {% endif %}
+                </p>
+                <hr>
+            {% empty %}
+                <p>This employee has not made any items recently. Time to get working!</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

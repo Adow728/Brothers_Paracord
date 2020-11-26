@@ -47,6 +47,7 @@
         <div class="panel-body">
             {% for employee in employees %}
                 {{employee.name}}: ${{employee.amount_owed|floatformat:2}}
+                <a href="{% url 'view_employee' employee.id %}">view</a>
             {% endfor %}
         </div>
     </div>

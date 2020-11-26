@@ -61,6 +61,12 @@ def order(request, id):
 
     return render(request, "management/order.html", context)
 
-def complete_order(request, order_id):
-    order = Order.objects.get(id=order_id)
-    
+def employee(request, id):
+    employee = Employee.objects.get(id=id)
+    outstanding_items = employee.employeebuild_set.filter(verified=False).order_by("date_completed")
+
+    context = {
+        "employee":employee,
+        "outstanding_items":outstanding_items
+    }
+    return render(request, "management/employee.html", context)

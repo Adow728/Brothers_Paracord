@@ -127,9 +127,13 @@ class ItemColor(models.Model):
     def __str__(self):
         return self.slot_name + ": " + self.color.name
     
-class EmployeeBuilds(models.Model):
+class EmployeeBuild(models.Model):
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
     item = models.ForeignKey(Item, on_delete=models.PROTECT, blank=True, null=True)
     builder = models.ForeignKey(Employee, on_delete=models.PROTECT)
     verified = models.BooleanField(default=True)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
+    date_completed = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.product.name

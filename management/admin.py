@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 
 from management.models import Product, Material, Color, ProductColorSlot, Customer, StoreProduct
-from management.models import Sale, StoreSale, Employee, Order, Item, ItemColor
+from management.models import Sale, StoreSale, Employee, Order, Item, ItemColor, EmployeeBuild
 
 admin.site.register(Product)
 admin.site.register(Material)
@@ -17,3 +17,4 @@ admin.site.register(Employee)
 admin.site.register(Order)
 admin.site.register(Item)
 admin.site.register(ItemColor)
+admin.site.register(EmployeeBuild)
