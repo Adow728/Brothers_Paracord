@@ -80,7 +80,7 @@ class Sale(models.Model):
 
 class StoreSale(models.Model):
     product_record = models.ForeignKey(StoreProduct, on_delete=models.PROTECT)
-    sale = models.ForeignKey(Sale, on_delete=models.PROTECT)
+    sale = models.OneToOneField(Sale, on_delete=models.PROTECT)
     quantity_sold = models.IntegerField()
 
     def __str__(self):
