@@ -97,7 +97,7 @@ class Order(models.Model):
     """An incomplete order (complete orders are deleted and described by sale)"""
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
     due_date = models.DateField(blank=True, null=True)
-    sale = models.ForeignKey(Sale, blank=True, null=True, on_delete=models.PROTECT)
+    sale = models.OneToOneField(Sale, blank=True, null=True, on_delete=models.PROTECT)
 
     @property
     def incomplete_items(self):
