@@ -57,7 +57,7 @@
             <h3 class="panel-title">Budgeting</h3>
         </div>
         <div class="panel-body">
-            <p>Sales: ${{sales|floatformat:2}}</p>
+            <p>Sales: ${{sales|floatformat:2}} <a href="{% url 'sales' %}">view</a></p>
             <p>Expenses: ${{expenses|floatformat:2}}</p>
             <p>Net Gain: ${{gain|floatformat:2}}</p>
             <p>Capital: ${{capital|floatformat:2}}</p>

@@ -1,0 +1,25 @@
+{% extends 'management/base.html' %}
+{% block content %}
+    <div>
+        <div class="page-header container">
+            <h3>Sales:</h3>
+        </div>
+        <table style="width:100%" class="table table-striped">
+            <thead class="thead-light">
+                <th scope="col">Date</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Amount</th>
+            </thead>
+            {% for sale in sales %}
+            <tr>
+                <td scope="row">{{sale.date}}</td>
+                <td>{{sale.customer.full_name}}</td>
+                <td>${{sale.revenue}}</td>
+                {% comment '' %}
+                <!--<td><a href="{% //url 'view_sale' sale.id %}">view</a></td>-->
+                {% endcomment %}
+            </tr>
+            {% endfor %}
+        </table> 
+    </div>
+{% endblock content %}

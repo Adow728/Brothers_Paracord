@@ -73,7 +73,7 @@ class Sale(models.Model):
     customer = models.ForeignKey(Customer, on_delete=Product)
     date = models.DateField()
     revenue = models.DecimalField(max_digits=4, decimal_places=2) # Price
-    description = models.TextField()
+    notes = models.TextField()
 
     def __str__(self):
         return self.customer.full_name + " - " + str(self.date)
@@ -106,6 +106,10 @@ class Order(models.Model):
             if not item.completed:
                 incomplete_items.append(item)
         return incomplete_items
+
+    @property
+    def num_items(self):
+        return len(self.item_set.all())
 
     def __str__(self):
         return self.customer.full_name + " - " + str(self.due_date)

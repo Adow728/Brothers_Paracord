@@ -3,6 +3,7 @@ from django.db.models import Sum
 
 from .models import Color, Employee, Order, Product, Sale, Material, StoreProduct
 from .queries import find_capital
+from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 
@@ -70,3 +71,12 @@ def employee(request, id):
         "outstanding_items":outstanding_items
     }
     return render(request, "management/employee.html", context)
+
+def sales(request):
+    sales = Sale.objects.order_by("date")
+
+    context = {
+        "sales":sales
+    }
+
+    return render(request, "management/sales.html", context)
