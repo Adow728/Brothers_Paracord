@@ -10,4 +10,5 @@ urlpatterns = [
     path('manage/order/<id>', views.order, name="view_order"),
     path('manage/employee/<id>', views.employee, name="view_employee"),
     path('manage/sales', views.sales, name="sales"),
+    path('manage/expenses', views.expenses, name="expenses"),
 ]

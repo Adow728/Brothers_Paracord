@@ -80,3 +80,16 @@ def sales(request):
     }
 
     return render(request, "management/sales.html", context)
+
+# Add sale view here later
+
+def expenses(request):
+    expenses = Material.objects.order_by("date_bought")
+    total_expenses = Material.objects.aggregate(Sum("price"))["price__sum"]
+
+    context = {
+        "expenses":expenses,
+        "total_expenses":total_expenses
+    }
+
+    return render(request, "management/expenses.html", context)

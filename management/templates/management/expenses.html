@@ -1,0 +1,27 @@
+{% extends 'management/base.html' %}
+{% block content %}
+    <div>
+        <div class="page-header container">
+            <h3>Expenses:</h3>
+        </div>
+        <table style="width:100%" class="table table-striped">
+            <thead class="thead-light">
+                <th scope="col">Date</th>
+                <th scope="col">Item</th>
+                <th scope="col">Amount</th>
+            </thead>
+            {% for expense in expenses %}
+            <tr>
+                <td scope="row">{{expense.date_bought}}</td>
+                <td>{{expense.name}}</td>
+                <td>${{expense.price|floatformat:2}}</td>
+            </tr>
+            {% endfor %}
+            <tr class="font-weight-bold">
+                <td scope="row"></td>
+                <td>Total:</td>
+                <td>${{total_expenses|floatformat:2}}</td>
+            </tr>
+        </table> 
+    </div>
+{% endblock content %}
